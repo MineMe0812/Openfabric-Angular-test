@@ -1,8 +1,10 @@
 import * as mongodb from "mongodb";
 import { Product } from "../models/product";
+import { User } from "../models/user";
  
 export const collections: {
    products?: mongodb.Collection<Product>;
+   users?: mongodb.Collection<User>;
 } = {};
  
 export async function connectToDatabase(uri: string) {
@@ -13,8 +15,10 @@ export async function connectToDatabase(uri: string) {
    await applySchemaValidation(db);
  
    const productsCollection = db.collection<Product>("products");
+   const usersCollection = db.collection<User>("users");
 
    collections.products = productsCollection;
+   collections.users = usersCollection;
 }
  
 // Update our existing collection with JSON schema validation so we know our documents will always match the shape of our product model, even if added elsewhere.

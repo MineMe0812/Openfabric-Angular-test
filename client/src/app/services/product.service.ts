@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject, tap } from 'rxjs';
 import { Product } from '../models/product.model';
- 
+import config  from '../utils/config';
 @Injectable({
  providedIn: 'root'
 })
 export class ProductService {
- private url = 'http://localhost:5200';
+ private url = `${config.SERVER_URL}:${config.SERVER_PORT}`;
  private products$: Subject<Product[]> = new Subject();
  
  constructor(private httpClient: HttpClient) { }
