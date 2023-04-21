@@ -2,7 +2,8 @@ import * as mongodb from "mongodb";
  
 export interface Product {
     name: string;
-    position: string;
-    level: "junior" | "mid" | "senior";
+    price: number;
+    description: string;
+    size: "M" | "L" | "XL";
     _id?: mongodb.ObjectId;
 }

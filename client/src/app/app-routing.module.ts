@@ -1,19 +1,30 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ProductsListComponent } from './components/products-list/products-list.component';
-import { AddProductComponent } from './components/add-product/add-product.component';
-import { EditProductComponent } from './components/edit-product/edit-product.component';
 
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
+import { LayoutComponent } from './layout/layout.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
+  { path: 'login', component: LoginComponent, data: { title: 'Sing In'} },
   { path: 'register', component: RegisterComponent },
-  { path: 'products', component: ProductsListComponent },
-  { path: 'products/new', component: AddProductComponent },
-  { path: 'products/edit/:id', component: EditProductComponent }];
+  { path: '', redirectTo: 'products', pathMatch: 'full' },
+  
+  {
+    path: '',
+    component: LayoutComponent,
+    data: {
+      title: 'Product'
+    },
+    children: [
+      {
+        path: 'products',
+        loadChildren: () =>
+          import('./views/product/products.module').then((m) => m.ProductsModule)
+      },
+    ]
+  },
+];
 
 
 @NgModule({

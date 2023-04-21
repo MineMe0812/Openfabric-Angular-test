@@ -1,0 +1,53 @@
+<div class="row">
+    <div class="col-12">
+      <div class="card mb-4">
+        <div class="card-header pb-0">
+            <div class="row">
+                <div class="col-6 d-flex align-items-center">
+                <h6 class="mb-0">Products</h6>
+                </div>
+                <div class="col-6 text-end">
+                <button class="btn bg-gradient-dark mb-0" [routerLink]="['new']"><i class="fas fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;Add Product</button>
+                </div>
+            </div>
+        </div>
+        <div class="card-body px-0 pt-0 pb-2">
+          <div class="table-responsive p-0">
+            <table class="table align-items-center justify-content-center mb-0">
+              <thead>
+                <tr>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Price</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Size</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let product of products$ | async">
+                  <td>
+                    <div class="d-flex px-2">
+                      <div class="my-auto">
+                        <h6 class="mb-0 text-sm">{{product.name}}</h6>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <p class="text-sm font-weight-bold mb-0">${{product.price}}</p>
+                  </td>
+                  <td>
+                    <span class="text-xs font-weight-bold">{{product.size}}</span>
+                  </td>
+                  <td class="align-middle" width="200">
+                    <button class="btn btn-outline-primary btn-sm mb-0 me-1" [routerLink]="['edit/', product._id]"><i class="fas fa-pencil-alt text-lg" aria-hidden="true"></i> Edit</button>
+                    <button class="btn btn-outline-danger btn-sm mb-0" (click)="deleteProduct(product._id || '')"><i class="fas fa-trash-alt text-lg" aria-hidden="true"></i> Delete</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+ 
