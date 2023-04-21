@@ -34,7 +34,7 @@ export class AuthService {
         email,
         password,
       },
-      httpOptions
+      { responseType: 'text' }
     );
   }
 

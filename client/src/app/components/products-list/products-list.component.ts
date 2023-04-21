@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 import { Product } from '../../models/product.model';
 import { ProductService } from '../../services/product.service';
 import { AuthService } from '../../services/auth.service';
@@ -41,6 +42,7 @@ export class ProductsListComponent implements OnInit {
  products$: Observable<Product[]> = new Observable();
  
  constructor(
+    private router: Router,
     private productsService: ProductService,
     private authService: AuthService,
     private storageService: StorageService
@@ -61,9 +63,9 @@ export class ProductsListComponent implements OnInit {
  logout(): void {
   this.authService.logout().subscribe({
     next: res => {
-      console.log(res);
       this.storageService.clean();
-      window.location.reload();
+      this.router.navigate(['/login']);
+
     },
     error: err => {
       console.log(err);

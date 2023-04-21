@@ -1,65 +1,84 @@
-<div class="col-md-12">
-  <div class="card card-container">
-    <img
-      id="profile-img"
-      src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-      class="profile-img-card"
-    />
-    <form
-      *ngIf="!isLoggedIn"
-      name="form"
-      (ngSubmit)="f.form.valid && onSubmit()"
-      #f="ngForm"
-      novalidate
-    >
-      <div class="form-group">
-        <label for="username">Username</label>
-        <input
-          type="text"
-          class="form-control"
-          name="username"
-          [(ngModel)]="form.username"
-          required
-          #username="ngModel"
-          [ngClass]="{ 'is-invalid': f.submitted && username.errors }"
-        />
-        <div *ngIf="username.errors && f.submitted" class="invalid-feedback">
-          Username is required!
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input
-          type="password"
-          class="form-control"
-          name="password"
-          [(ngModel)]="form.password"
-          required
-          minlength="6"
-          #password="ngModel"
-          [ngClass]="{ 'is-invalid': f.submitted && password.errors }"
-        />
-        <div *ngIf="password.errors && f.submitted" class="invalid-feedback">
-          <div *ngIf="password.errors['required']">Password is required</div>
-          <div *ngIf="password.errors['minlength']">
-            Password must be at least 6 characters
+<main class="main-content  mt-0">
+  <section>
+    <div class="page-header min-vh-75">
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto">
+            <div class="card card-plain mt-8">
+              <div class="card-header pb-0 text-left bg-transparent">
+                <h3 class="font-weight-bolder text-info text-gradient">Welcome Openfabric</h3>
+                <p class="mb-0">Enter your username and password to sign in</p>
+              </div>
+              <div class="card-body">
+                <form
+                  *ngIf="!isLoggedIn"
+                  name="form"
+                  (ngSubmit)="f.form.valid && onSubmit()"
+                  #f="ngForm"
+                  novalidate
+                >
+                <div class="form-group">
+                  <div *ngIf="f.submitted && isLoginFailed" class="alert alert-danger text-white" role="alert">
+                    Login failed: {{ errorMessage }}
+                  </div>
+                </div>
+
+                  <label>Username</label>
+                  <div class="mb-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="username"
+                      [(ngModel)]="form.username"
+                      required
+                      #username="ngModel"
+                      placeholder="Username"
+                      [ngClass]="{ 'is-invalid': f.submitted && username.errors }"
+                    />
+                    <div *ngIf="username.errors && f.submitted" class="invalid-feedback">
+                      Username is required!
+                    </div>
+                  </div>
+                  <label>Password</label>
+                  <div class="mb-3">
+                    <input
+                      type="password"
+                      class="form-control"
+                      name="password"
+                      [(ngModel)]="form.password"
+                      required
+                      minlength="6"
+                      #password="ngModel"
+                      placeholder="Password"
+                      [ngClass]="{ 'is-invalid': f.submitted && password.errors }"
+                    />
+                    <div *ngIf="password.errors && f.submitted" class="invalid-feedback">
+                      <div *ngIf="password.errors['required']">Password is required</div>
+                      <div *ngIf="password.errors['minlength']">
+                        Password must be at least 6 characters
+                      </div>
+                    </div>
+                  </div>
+                  <div class="text-center">
+                    <button class="btn bg-gradient-info w-100 mt-4 mb-0">Sign in</button>
+                  </div>
+                </form>
+              </div>
+              <div class="card-footer text-center pt-0 px-lg-2 px-1">
+                <p class="mb-4 text-sm mx-auto">
+                  Don't have an account?
+                  <a routerLink="/register" class="text-info text-gradient font-weight-bold">Sign up</a>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="oblique position-absolute top-0 h-100 d-md-block d-none me-n8">
+              <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6" style="background-image:url('../assets/img/curved-images/curved6.jpg')"></div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="form-group">
-        <button class="btn btn-primary btn-block">
-          Login
-        </button>
-      </div>
-      <div class="form-group">
-        <div *ngIf="f.submitted && isLoginFailed" class="alert alert-danger" role="alert">
-          Login failed: {{ errorMessage }}
-        </div>
-      </div>
-    </form>
-
-    <div class="alert alert-success" *ngIf="isLoggedIn">
-      Logged in as {{ roles }}.
     </div>
-  </div>
-</div>
+  </section>
+</main>
