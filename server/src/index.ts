@@ -2,6 +2,7 @@ import * as dotenv from "dotenv";
 import cors from "cors";
 import express from "express";
 import cookieSession from "cookie-session";
+import path from "path";
 
 import { connectToDatabase } from "./config/database";
 import { indexRouter } from "./routes/index";
@@ -26,6 +27,9 @@ connectToDatabase(ATLAS_URI)
           origin: [`${SERVER_URL}:${CLIENT_PROT}`],
         })
       );
+
+      app.use(express.static(path.join(__dirname, './client')));
+
        app.use(express.json());
        app.use(express.urlencoded({ extended: true }));
        
@@ -39,6 +43,10 @@ connectToDatabase(ATLAS_URI)
        
        // define all router
        indexRouter(app);
+
+       app.get('/', (req, res) => {
+            res.sendFile(path.join(__dirname, './client/index.html'));
+        });
 
        app.get("/", (req, res) => {
             res.json({ message: "Welcome to Dima application." });
