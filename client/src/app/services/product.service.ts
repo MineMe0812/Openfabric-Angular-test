@@ -7,7 +7,7 @@ import config  from '../utils/config';
  providedIn: 'root'
 })
 export class ProductService {
- private url = `${config.SERVER_URL}:${config.SERVER_PORT}`;
+ private url = `${config.SERVER_URL}`;
  private products$: Subject<Product[]> = new Subject();
  
  constructor(private httpClient: HttpClient) { }

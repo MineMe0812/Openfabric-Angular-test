@@ -1,4 +1,4 @@
 export default {
-    SERVER_URL: "http://localhost",
-    SERVER_PORT: "5200",
+    //SERVER_URL: "http://localhost:5200",
+    SERVER_URL: "https://openfabric.vercel.app",
 }
